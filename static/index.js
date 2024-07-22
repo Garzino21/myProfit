@@ -31,11 +31,6 @@ window.onload = async function () {
         setInterval(getOpenPositions, 60000);
 
         _select.on("change", function () {
-                let value = _select.val();
-                clearInterval(intervalId);
-                intervalId = setInterval(function () {
-                        getOccasions();
-                }, 1000);
         }).prop("disabled", true);     
 
         async function getOccasions() {
