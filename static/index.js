@@ -9,9 +9,11 @@ window.onload = async function () {
         let _weekProfit = $("#divWeekProfit");
         let _positions = $("#divPositions");
         let _occasions = $("#divOccasions");
+        let _select = $("#intervalControl");
         let coinArray = [];
         let coinMarker = 0;
         let intervalId;
+
 
         getCoinInfo();
 
@@ -27,6 +29,14 @@ window.onload = async function () {
         setInterval(getWalletBalanceFunding, 60000);
         setInterval(getLastWeekProfits, 120000);
         setInterval(getOpenPositions, 60000);
+
+        _select.on("change", function () {
+                let value = _select.val();
+                clearInterval(intervalId);
+                intervalId = setInterval(function () {
+                        getOccasions();
+                }, 1000);
+        }).prop("disabled", true);     
 
         async function getOccasions() {
                 console.log(coinMarker);

@@ -1,3 +1,4 @@
+import { RateLimitError } from "openai";
 import { coerceInteger } from "openai/core";
 import { symbolName } from "typescript";
 const _nodemailer = require("nodemailer");
@@ -85,6 +86,7 @@ app.get('/api/coinInfo', (req, res) => {
 
 app.get('/api/occasions', (req, res) => {
     let symbol = req["query"]["symbol"];
+    let limit = req["query"]["limit"];
     const client = new RestClientV5({
         testnet: false,
         key: 'vZu16sERUzefXtrZr9',
@@ -95,6 +97,7 @@ app.get('/api/occasions', (req, res) => {
         category: "linear",
         symbol: symbol,
         interval: "M",
+        limit: limit,
     })
         .catch((error) => {
             res.send(JSON.stringify(error));
