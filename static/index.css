@@ -1,0 +1,196 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100dvw;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    display: flex;
+    position: relative;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(215, 215, 215);
+}
+
+.firstTitle {
+    text-align: center;
+    font-size: 30pt;
+    font-weight: bold;
+    margin: 0;
+    position: absolute;
+    margin-top: 5px;
+    width: 100%;
+    font-family: cursive;
+
+}
+
+.contain {
+    background-color: rgb(164, 169, 188);
+    width: 90%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 70px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.internalDiv {
+    background-color: rgb(215, 215, 215);
+    width: 350px;
+    height: 100px;
+    margin-left: 45px;
+    margin-top: 38px;
+    border-radius: 15px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 35px;
+    font-weight: bold;
+    font-size: 15pt;
+}
+
+.bottomDescription {
+    text-align: center;
+    width: 350px;
+    height: 30px;
+    font-size: 10pt;
+    padding-top: 12px;
+}
+
+.lastClosed {
+    text-align: center;
+    width: 400px;
+    height: 515px;
+    margin: 38px;
+    font-size: 10pt;
+    padding-top: 12px;
+    float: right;
+    background-color: rgb(215, 215, 215);
+    border-radius: 15px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+.title {
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profitItem {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 70px;
+    background-color: rgb(164, 169, 188);;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+.symbol {
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.profit {
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    color: green;
+}
+
+.loss {
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    color: red;
+}
+
+.fz15 {
+    font-size: 15pt;
+}
+
+.divStandard{
+    text-align: center;
+    border-radius: 25px;
+    background-color: rgb(215, 215, 215);
+    width: 95%;
+    margin: auto;
+    height: fit-content;
+    margin-top: 38px;
+    margin-bottom: 38px;
+    padding-bottom: 20px;
+}
+
+.noPositions {
+    text-align: center;
+    font-size: 15pt;
+    padding-bottom: 20px;
+    width: fit-content;
+    margin: auto;
+    padding-top: 12px;
+}
+
+.perfectTitle {
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: fit-content;
+    margin: auto;
+    padding-top: 12px;
+}
+
+.indentTable {
+    width: 90%;
+    margin: auto;
+}
+
+.trTablePositions {
+    background-color: rgb(215, 215, 215);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    background-color: rgb(164, 169, 188);;
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 980px) {
+    .lastClosed{
+        float: none;
+        margin: auto;
+        margin-top: 20px;
+        width: 90%;
+        margin-bottom:60px;
+    }
+
+    .contain {
+        height: 100%;
+        margin-top: 90px;
+    }
+
+    .firstTitle {
+        font-size: 40pt;
+        position: absolute;
+    }
+
+    .internalDiv {
+        width: 90%;
+        margin:auto;
+        margin-bottom: 15px;
+        font-size: 25pt;
+        padding-top: 25px;
+    }
+
+    
+
+    .bottomDescription {
+        width: 90%;
+        margin:auto;
+        margin-bottom: 15px;
+        padding-top: 0px;
+    }
+}
