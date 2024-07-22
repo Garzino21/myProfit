@@ -67,6 +67,43 @@ app.get('/api/openPositions', (req, res) => {
         });
 });
 
+app.get('/api/coinInfo', (req, res) => {
+    const client = new RestClientV5({
+        testnet: false,
+        key: 'vZu16sERUzefXtrZr9',
+        secret: '3e5l1IsyIVFoD09dH9Ul8263Z1KOuyTTV9J9',
+    });
+
+    client.getCoinInfo()
+        .catch((error) => {
+            res.send(JSON.stringify(error));
+        })
+        .then((response) => {
+            res.send(JSON.stringify(response));
+        });
+});
+
+app.get('/api/occasions', (req, res) => {
+    let symbol = req["query"]["symbol"];
+    const client = new RestClientV5({
+        testnet: false,
+        key: 'vZu16sERUzefXtrZr9',
+        secret: '3e5l1IsyIVFoD09dH9Ul8263Z1KOuyTTV9J9',
+    });
+
+    client.getIndexPriceKline({
+        category: "linear",
+        symbol: symbol,
+        interval: "M",
+    })
+        .catch((error) => {
+            res.send(JSON.stringify(error));
+        })
+        .then((response) => {
+            res.send(JSON.stringify(response));
+        });
+});
+
 app.get('/api/wallet-balance', (req, res) => {
     let accountType = req["query"]["accountType"];
     const client = new RestClientV5({

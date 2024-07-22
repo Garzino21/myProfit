@@ -8,17 +8,91 @@ window.onload = async function () {
         let _listProfits = $("#divListProfits");
         let _weekProfit = $("#divWeekProfit");
         let _positions = $("#divPositions");
+        let _occasions = $("#divOccasions");
+        let coinArray = [];
+        let coinMarker = 0;
+        let intervalId;
+
+        getCoinInfo();
 
         await getWalletBalanceUnified("UNIFIED");
         await getWalletBalanceFunding("FUND");
         await getLastWeekProfits();
         await getOpenPositions();
+        intervalId = setInterval(getOccasions, 1000);
+        console.log(intervalId);
         //await getMail();
         // await getTransactions();
         setInterval(getWalletBalanceUnified, 60000);
         setInterval(getWalletBalanceFunding, 60000);
         setInterval(getLastWeekProfits, 120000);
         setInterval(getOpenPositions, 60000);
+
+        async function getOccasions() {
+                console.log(coinMarker);
+                console.log(coinArray.length);
+                if (coinMarker <= coinArray.length) {
+                        if (coinMarker + 10 > coinArray.length) {
+                                let add = coinArray.length - coinMarker;
+                                for (let i = coinMarker; i < add + coinMarker; i++) {
+                                        let symbol = coinArray[i];
+                                        let request = inviaRichiesta("GET", "/api/occasions", { 'symbol': symbol })
+                                        request.catch((err) => alert(err))
+                                        request.then((occasions) => {
+                                                console.log(occasions)
+                                        })
+                                }
+                                clearInterval(intervalId);
+                                console.log(intervalId);
+                                console.log("clear");
+                                console.log(coinMarker);
+                                console.log(coinArray.length);
+                        }
+                        else if (coinMarker + 10 <= coinArray.length) {
+                                for (let i = coinMarker; i < 10 + coinMarker; i++) {
+                                        let symbol = coinArray[i];
+                                        let request = inviaRichiesta("GET", "/api/occasions", { 'symbol': symbol })
+                                        request.catch((err) => alert(err))
+                                        request.then((occasions) => {
+                                                console.log(occasions)
+                                                if (occasions.data.result.list) {
+                                                        let cont = 0;
+                                                        let valoreOdierno = 0;
+                                                        let minStoric = 100000000;
+
+                                                        for (let item of occasions.data.result.list) {
+                                                                if (cont == 0) {
+                                                                        valoreOdierno = item[3];
+                                                                        cont++;
+                                                                }
+
+                                                                if (minStoric > item[3]) {
+                                                                        minStoric = item[3];
+                                                                }
+                                                        }
+                                                        if (valoreOdierno < minStoric) {
+                                                                let _div = $("<div>").appendTo(_occasions)
+                                                                $("<div>").appendTo(_div).text(symbol).addClass("symbol");
+                                                        }
+                                                }
+                                        })
+                                }
+                                coinMarker += 10;
+                        }
+                }
+        }
+
+        async function getCoinInfo() {
+                let request = inviaRichiesta("GET", "/api/coinInfo")
+                request.catch((err) => alert(err))
+                request.then((coinInfo) => {
+                        console.log(coinInfo)
+                        for (let item of coinInfo.data.result.rows) {
+                                coinArray.push(item.name + "USDT");
+                        }
+                })
+                console.log(coinArray);
+        }
 
         async function getTransactions() {
                 let request = inviaRichiesta("GET", "/api/transactions")
